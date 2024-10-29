@@ -1,0 +1,34 @@
+version: '3.1'
+services:
+  odoo17-web:
+    build: .
+    # image:
+    container_name: odoo17_web
+    restart: always
+    user: root
+    depends_on:
+      - odoo17-db
+    ports:
+      - "8069:8069"
+      - "8072:8072"
+    volumes:
+      - ./odoo17-web-data:/var/lib/odoo
+      - ./odoo.conf:/etc/odoo/odoo.conf
+      - ./odoo-addons:/mnt/extra-addons
+    environment:
+      - HOST=odoo17-db
+      - ODOO_USER=${ODOO_USER}
+      - PASSWORD=${PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    command: odoo -i project_install --without-demo=WITHOUT_DEMO -d ${POSTGRES_DB} && chown -R odoo:odoo /var/lib/odoo
+
+  odoo17-db:
+    image: postgres:14-alpine
+    container_name: odoo17_db
+    restart: always
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${ODOO_USER}
+      - POSTGRES_PASSWORD=${PASSWORD}
+    volumes:
+      - ./odoo17-db-data:/var/lib/postgresql/data

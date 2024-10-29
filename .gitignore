@@ -1,0 +1,11 @@
+# Ignore file
+*.swp
+.gitlab-ci.yml
+.env
+
+# Ignore folder
+__pycache__
+*.py[cod]
+
+# C extensions
+*.so
