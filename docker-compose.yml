@@ -11,8 +11,8 @@ services:
     networks:
       - odoo-network
     volumes:
-      - addons:/mnt/extra-addons/addons
-      - addition-addons:/mnt/extra-addons/addition-addons
+      - ./addons:/mnt/extra-addons/addons
+      - ./additional-addons:/mnt/extra-addons/additional-addons
       - odoo-data:/var/lib/odoo
       - ./odoo.conf:/etc/odoo/odoo.conf
     logging:
