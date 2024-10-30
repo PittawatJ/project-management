@@ -14,7 +14,7 @@ services:
       - ./addons:/mnt/extra-addons/addons
       - ./additional-addons:/mnt/extra-addons/additional-addons
       - odoo-data:/var/lib/odoo
-      - ./odoo.conf:/etc/odoo/odoo.conf
+      - ./config/odoo.conf:/etc/odoo
     logging:
       options:
         max-size: 10m
